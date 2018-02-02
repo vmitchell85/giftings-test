@@ -1,0 +1,528 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Spiritual Gifts Results</title>
+<!--CSS LINKS-->
+		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+		<style>
+			.span1 .label{
+				font-size: 24px;
+			}
+			#bitLink{
+				font-size: 24px;
+				font-weight: bold;
+				padding-left: 30px;
+			}
+			h1{
+				color: white;
+			}
+			body{
+				background-image: url('img/low_contrast_linen.png');
+			}
+		</style>
+<!--JS LINKS-->
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="js/custom.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				processResults();
+				$('.popo').popover();
+				$('.tt').tooltip();
+				getLink();
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container" style="margin-top: 100px;">
+			<div class="row">
+				<h1>Assessment Results</h1>
+			</div>
+			<div class="row">
+				<div class="span8 alert alert-info">
+					<strong>Here are the results of your assessment!</strong>
+					<br />
+					Below the results you can find descriptions of each Spiritual Gift.
+					<br /><br />
+					This assessment is not intended to be a exact determination of your giftings. You should take the time to look into each gifting as you may not know that God has gifted you in a certain area.
+					<br /><br>
+					Your first result(s) will be highlighted in <span class="label label-success">green</span>, your second in <span class="label label-warning">orange</span>, and your third in <span class="label label-important">red</span>.
+					<br /><br />
+					Use this short link to come back to your results:
+					<br /><br />
+					<span id="bitLink"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="well span8">
+					<div class="row">
+						<div class="span3">
+							<strong>Administration</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="aBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="aNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Apostleship</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="bBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="bNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Craftsmanship</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="cBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="cNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Creative Communication</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="dBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="dNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Discernment</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="eBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="eNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Encouragement</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="fBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="fNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Evangelism</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="gBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="gNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Faith</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="hBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="hNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Giving</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="iBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="iNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Helps</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="jBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="jNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Hospitality</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="kBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="kNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Intercession</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="lBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="lNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Knowledge</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="mBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="mNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Leadership</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="nBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="nNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Mercy</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="oBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="oNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Prophecy</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="pBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="pNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Shepherding</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="qBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="qNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Teaching</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="rBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="rNo" class="label">--</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
+							<strong>Wisdom</strong>
+						</div>
+						<div class="span4">
+							<div class="progress progress-striped">
+							  <div id="sBar" class="bar" style="width: 0%;"></div>
+							</div>
+						</div>
+						<div class="span1">
+							<span id="sNo" class="label">--</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="well tabbable tabs-left span8"> <!-- Only required for left/right tabs -->
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#administration" data-toggle="tab">Administration</a></li>
+						<li><a href="#apostleship" data-toggle="tab">Apostleship</a></li>
+<!--						<li><a href="#counseling" data-toggle="tab">Counseling</a></li>-->
+						<li><a href="#craftsmanship" data-toggle="tab">Craftsmanship</a></li>
+						<li><a href="#creativecommunication" data-toggle="tab">Creative Communication</a></li>
+						<li><a href="#discernment" data-toggle="tab">Discernment</a></li>
+						<li><a href="#encouragement" data-toggle="tab">Encouragement</a></li>
+						<li><a href="#evangelism" data-toggle="tab">Evangelism</a></li>
+						<li><a href="#faith" data-toggle="tab">Faith</a></li>
+						<li><a href="#giving" data-toggle="tab">Giving</a></li>
+						<li><a href="#helps" data-toggle="tab">Helps</a></li>
+						<li><a href="#hospitality" data-toggle="tab">Hospitality</a></li>
+						<li><a href="#intercession" data-toggle="tab">Intercession</a></li>
+						<li><a href="#knowledge" data-toggle="tab">Knowledge</a></li>
+						<li><a href="#leadership" data-toggle="tab">Leadership</a></li>
+						<li><a href="#mercy" data-toggle="tab">Mercy</a></li>
+						<li><a href="#prophecy" data-toggle="tab">Prophecy</a></li>
+						<li><a href="#shepherding" data-toggle="tab">Shepherding</a></li>
+						<li><a href="#teaching" data-toggle="tab">Teaching</a></li>
+						<li><a href="#wisdom" data-toggle="tab">Wisdom</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="administration">
+							The spiritual capability to understand what makes an organization function, and the special ability to plan and execute procedures that increase the church's organizational effectiveness. (<a href="#" class="popo" rel="popover" title="1 Corinthians 12:28" data-content="And God has appointed in the church first apostles, second prophets, third teachers, then miracles, then gifts of healing, helping, administrating, and various kinds of tongues.">1 Corinthians 12:28</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift understands the practical steps that need to be taken in order to realize a given objective. Gifted administrators are committed to effectiveness and efficiency. They can look at a situation and bring order to chaos, keeping the overall picture in mind. Administrators are needed who can "steward" the resources of the local church. These resources include money, buildings, staff, and volunteers. Though a person with this gift is mostly behind the scenes, they enable the "up front" ministries and gifts to be more efficient and effective.
+							<br /><br />
+							<strong>Cautions: </strong>If you have this gift, be careful that you don't stifle the activity of the Holy Spirit in your own life. Good administrators are willing to make a course change if the leadership calls for a shift in plans. This requires a submissive spirit to leadership. There is a danger among administrative people to "use" others to reach a goal. Don't merely strive for the ends; appreciate what God wants to do through the means. Remember that all people are in a process.
+						</div>
+						<div class="tab-pane" id="apostleship">
+							The spiritual capability to start churches and oversee their development. (<a href="#" class="popo" rel="popover" title="1 Corinthians 12:28" data-content="And God has appointed in the church first apostles, second prophets, third teachers, then miracles, then gifts of healing, helping, administrating, and various kinds of tongues.">1 Corinthians 12:28</a>; <a href="#" class="popo" rel="popover" title="Ephesians 4:11" data-content="And he gave the apostles, the prophets, the evangelists, the shepherds and teachers,">Ephesians 4:11</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> Likened to modern day missionaries, a person with this gift has a heart to preach the gospel to people in a different cultural setting who haven't heard the Gospel. They have a desire to go across cultures and may enjoy starting new churches. "Cross-cultural" work can include inner city or international ministries. The authority of the apostle is based on the Word and the body of believers that sends them out.
+							<br /><br /> 
+							<strong>Cautions:</strong> You may desire to cut a new path before you are ready to move away from your present ministry efforts. Make certain that there are appropriate provisions for the people that God has entrusted you in your present ministry. 
+						</div>
+						<!--<div class="tab-pane" id="counseling">
+							The spiritual capability to effectively listen to people and assist them in their quest for psychological and relational wholeness.
+							<br /><br />
+							<strong>Distinctives:</strong> People with this gift have excellent listening skills. They tend to be very approachable while maintaining the ability to convey difficult truths in a loving way. They empathize, but also offer constructive advice, devising a plan of action toward wholeness and holding others accountable to take needed steps to that end. 
+							<br /><br />
+							<strong>Cautions:</strong> Distinguish between having a gift and having a burden in this area. Some have a real heart for hurting people, and desire to help them through their pain. But those who have a passion to help may or may not be gifted counselors. People who have undergone counseling often develop skills in this area, but this is not the same as being a gifted counselor.
+							<br /><br /> 
+							Inexperienced counselors often offer quick, trite answers to difficult problems. It is also common to read our own experiences into someone else's life. Make every effort to ensure it is God's wisdom you are providing, not your own opinion. Counselors should also keep the final objective in mind: helping people enjoy a healthy walk with the Lord and serve others in love. 
+						</div>-->
+						<div class="tab-pane" id="craftsmanship">
+							The spiritual capability to enhance ministry through the creative construction of necessary tools for ministry. (<a href="http://www.biblegateway.com/passage/?search=Exodus%2031&version=ESV" rel="tooltip" class="tt" data-original-title="To BibleGateway.com">Exodus 31</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift is a hands-on person. He or she may be a builder, architect, designer; someone who enhances ministry by his other unique skills. The gift can be expressed in carpentry, metalworking, and other constructive skills.
+							<br /><br />
+							<strong>Cautions:</strong> If you have this gift, don't belittle your contribution as insignificant or not spiritual because it's so tangible. Don't separate your opportunities to personally minister to people from the ministry project that you're working on. 
+						</div>
+						<div class="tab-pane" id="creativecommunication">
+							The spiritual capability to communicate God's truth through a variety of art forms. (The Holy Spirit's expression is in various forms in the Bible - poetry, song, narrative, parable, metaphor, etc.)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift is very creative and imaginative. This person is able to communicate truths in unique ways from a variety of angles. They tend to be visual thinkers. Areas of ministry include programming, sound, lighting, video, drama, music, etc. Public announcements of events may be an application, with the ability to design attractive and catchy flyers to attract more people to events.
+							<br /><br />
+							<strong>Cautions:</strong> Be careful not to be artsy for art's sake. Use your gift to promote God and his kingdom, not yourself. Creative communicators stray when they try to create and do things that enamor people with the art form and the artist rather than the message.
+							<br /><br />
+							Creative communicators need to be flexible and willing to submit to the wishes of the people around them. Sometimes they aren't team players. This is an area that God will address. The fact that you have visible talents where others don't does not mean you should have full say in music, drama, or other artistic areas. 
+						</div>
+						<div class="tab-pane" id="discernment">
+							The spiritual capability to distinguish between truth and error, and to identify deception in character and in relationships. (<a href="#" class="popo" rel="popover" title="1 Corinthians 12:10" data-content="to another the working of miracles, to another prophecy, to another the ability to distinguish between spirits, to another various kinds of tongues, to another the interpretation of tongues.">1 Corinthians 12:10</a>, "distinguishing between spirits.")
+							<br /><br />
+							<strong>Distinctives:</strong> Discernment is a keen sense of insight that enables someone to recognize potential or actual problems in relationships, imbalance in teachings, the presence of demonic activity, or misuse of scripture. Discernment must be based on knowing Biblical truth. Once this person knows the truth, they can clearly pick out problems or important steps that need to be taken.
+							<br /><br />
+							<strong>Cautions:</strong> Many of us have known people that are very discerning and perhaps gifted, but what they do with that discernment is far from God's will. They have great insight, but then take on the role of the Holy Spirit to expose and correct problems in the other person's life on their own time schedule. If you have this gift, learn to use it skillfully by seeking help from others who are gifted in wisdom, counseling, and shepherding. 
+						</div>
+						<div class="tab-pane" id="encouragement">
+							The spiritual capability to reassure, strengthen, and affirm those who are discouraged or wavering in their faith. (<a href="#" class="popo" rel="popover" title="Romans 12:8" data-content="the one who exhorts, in his exhortation; the one who contributes, in generosity; the one who leads, with zeal; the one who does acts of mercy, with cheerfulness.">Romans 12:8</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift urges others to apply the truth in their lives; it is not just a gift of friendliness and back-slapping. This person is able to get alongside wavering or discouraged people and effectively challenge them to be all they can be spiritually. When you are around these people, you feel like keeping on track and continuing to fight the good fight.
+							<br />
+							This person tends to be very positive, full of faith, reassuring to the unstable. They also tend to be results-oriented, concerned with consistency of practice with profession, very practical and pragmatic ("What works?"). They tend to be expressive and are often viewed as an "emoter" by other people. Encouragers understand the importance of emotions, but are concerned with knowing and doing God's will as well.
+							<br /><br />
+							<strong>Cautions:</strong> If you have this gift, you may tend to make things too simple. For example, when someone is hurting, quoting Romans 8:28 ("and we know that God causes all things to work together for good to those who love God, to those who are called according to His purpose") is too simple. This is a great truth but encouragement in a person's walk at that moment may not be what's needed. The individual may simply need your company.
+							<br />
+							Your optimism can make others feel as if you haven't really connected; it makes them wonder if you really understand. Take time to learn about what they're going through before helping to build them up.
+						</div>
+						<div class="tab-pane" id="evangelism">
+							The spiritual capability to effectively communicate the message of Christ to non-Christians so they can respond in faith and move toward discipleship. (<a href="#" class="popo" rel="popover" title="Ephesians 4:11" data-content="And he gave the apostles, the prophets, the evangelists, the shepherds and teachers,">Ephesians 4:11</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift has a strong desire to turn conversations to spiritual matters and has an instinctive ability to do this. The evangelist's desire to share the Gospel with non-believers is often greater than being involved with the grounding and discipleship of believers.
+							<br /><br />
+							All Christians are called to witness to non-believers (<a href="#" class="popo" rel="popover" title="1 Peter 3:15" data-content="but in your hearts honor Christ the Lord as holy, always being prepared to make a defense to anyone who asks you for a reason for the hope that is in you; yet do it with gentleness and respect,">1 Peter 3:15</a>). The non-gifted "witnesser" will probably see fewer results and be less "at home" sharing the Gospel than a gifted evangelist.
+							<br /><br />
+							<strong>Cautions:</strong> Avoid stereotypes (as with all the gifts) as to the environment or ministry in which this would be used. Most people won't be knocking on doors or using cold-medium evangelism. Don't be satisfied with just one approach. Be willing to read about evangelism and talk with other Christians about their approach so that God can develop your gift, using it in a variety of ways. Be careful that a critical spirit doesn't emerge because other believers aren't speaking to three to five people per week - that is gift projection. You can be hard on others when you don't see them expressing themselves with the same intensity in the areas that you've been gifted. 
+						</div>
+						<div class="tab-pane" id="faith">
+							The spiritual capability to trust God's will and act on it with unwavering belief in His ability. (<a href="#" class="popo" rel="popover" title="1 Corinthians 12:9" data-content="to another faith by the same Spirit, to another gifts of healing by the one Spirit,">1 Corinthians 12:9</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> This gift is often expressed in a strong prayer life. A person with this gift lives in constant awareness of the reality of the supernatural as well as the natural. This person is certain that God will bring to pass what He promises and is therefore reliable during trials. He or she can also help others see God working in trials.
+							<br /><br />
+							<strong>Cautions:</strong> Remember that faith is active. It isn't only God's work; we must be willing to obey His commands. God works through people in reaching the lost and in helping Christians grow. If you have this gift, you might look and critique your group, asking, "Why doesn't our group have the vitality I read about in Acts 2? Is it because the Spirit is different or absent?" Recognize that God is at work in all churches and that human action does matter.
+						</div>
+						<div class="tab-pane" id="giving">
+							The spiritual capability to contribute money and material resources to the work of the Lord with cheerfulness and liberality. (<a href="#" class="popo" rel="popover" title="Romans 12:8" data-content="the one who exhorts, in his exhortation; the one who contributes, in generosity; the one who leads, with zeal; the one who does acts of mercy, with cheerfulness.">Romans 12:8</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> God has given the person with this gift the ability to give well beyond normal levels, either through wealth or faith. God has often blessed this person with financial ability through increased income or other means in order to build up the Kingdom of God. Serving others this way causes a sense of joy, a sense of confidence in leadership and a desire to encourage that ministry in others and do it with liberality. All Christians are called to give, but some are compelled to give much more. The gifted giver is often asking, "How can I free up the most amount of resources to maximize their potential for kingdom use?" Often gifted givers try to help others to see success in their own financial stewardship.
+							<br /><br />
+							<strong>Cautions:</strong> If you have this gift, you might not see it as a spiritual ministry. Since all Christians are called to give, you may believe that you're only doing a perfunctory, mandated service. Or you may think that giving money is too tangible to be a spiritual gift. Realize that financial resources are necessary in ministry to bring the lost to Christ. Be careful that you don't inadvertently use resources for "personal agenda" giving within the church. Allow the leadership to dispense those resources as it sees fit. Be a generous giver and stimulate others to give.
+						</div>
+						<div class="tab-pane" id="helps">
+							The spiritual capability to be God's channel to restore people to health. (<a href="#" class="popo" rel="popover" title="1 Corinthians 12:9" data-content="to another faith by the same Spirit, to another gifts of healing by the one Spirit,">1 Corinthians 12:9</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> There are many kinds of healing in the body of Christ. A person with this gift is an avenue of God's power for physical healing, emotional healing, or relational healing. They often see God's power released through personal prayer. Healing can include the use of "natural" means. Christian hospitals in missions may be in view here.
+							<br /><br />
+							<strong>Cautions:</strong> Keep this amazing gift in perspective. Although God does miraculously heal, this is not His normative way of working through the church. The Bible is clear that God's primary way of working is through process, such as through His redemptive plan and in personal sanctification. To expect that miraculous healing be normative in the church or that the church should be focused on this ministry is contrary to God's purpose for the church as expressed in His word to us.
+						</div>
+						<div class="tab-pane" id="hospitality">
+							The spiritual capability to personally care for people by providing fellowship, food, or shelter. (<a href="#" class="popo" rel="popover" title="1 Peter 4:9" data-content="Show hospitality to one another without grumbling.">1 Peter 4:9</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift enjoys providing a caring, warm atmosphere for those whom God is calling to the church. They have an ability to connect with people; they provide environments where people feel welcome. This person tends to gravitate toward those who are standing off to the side, looking confused. A good host loves to have people to their home and is more pre-occupied with the comfort of others than the image of their home. This gift is especially needed in a large church. One of the more frequent questions asked by newer people is, "Can a church this size care for me personally?"
+							<br /><br />
+							People with the gift of hospitality can have incredible impact on children. As someone with this gift opens up their house for others, their children see the value of fellowship and using material blessings as a stewardship for the Lord's work. Of course this doesn't mean that they never get time alone with their family at home.
+							<br /><br />
+							<strong>Cautions:</strong> If you have this gift, the challenge is to serve without complaint. Struggles with materialism can suppress the expression of this gift. It can be difficult and tiresome at times. Regularly reflect on the contribution you are making to the work of Christ.
+						</div>
+						<div class="tab-pane" id="intercession">
+							The special ability God gives to some to pray for extended periods of time on a regular basis and see frequent and specific answers to their prayers to a degree much greater than that which is expected of the average Christian. 
+							<br /><br />
+							The divine enablement to consistently pray on behalf of and for others, seeing frequent and specific results. 
+							<br /><br />
+							People with this gift:
+							<br />
+							<ul>
+								<li>feel compelled to earnestly pray on behalf of someone or some cause </li>
+								<li>have a daily awareness of the spiritual battles being waged and pray</li>
+								<li>are convinced God moves in direct response to prayer </li>
+								<li>pray in response to the leading of the spirit, whether they understand it or not </li>
+								<li>exercise authority and power for the protection of others and the equipping of them to serve.</li>
+							</ul>
+						</div>
+						<div class="tab-pane" id="knowledge">
+							The divine empowerment to accumulate and analyze information effectively. (<a href="#" class="popo" rel="popover" title="1 Corinthians 12:8" data-content="For to one is given through the Spirit the utterance of wisdom, and to another the utterance of knowledge according to the same Spirit,">1 Corinthians 12:8</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift enjoys studying, doing research, and digging for nuggets of truth. They like to assess and accumulate information, facts, and data. They are great helpers for teachers and Word-oriented programs. "Word of Knowledge" indicates that they can communicate that truth as well, even if not through a teaching or prophetic gift.
+							<br /><br />
+							<strong>Cautions:</strong> If you have this gift, watch for a tendency to be reclusive. You will have to balance time alone studying with pursuit of close relationships. 
+						</div>
+						<div class="tab-pane" id="leadership">
+							The spiritual capability to instill vision, to motivate, and to direct people to accomplish the work of the ministry. (<a href="#" class="popo" rel="popover" title="Romans 12:8" data-content="the one who exhorts, in his exhortation; the one who contributes, in generosity; the one who leads, with zeal; the one who does acts of mercy, with cheerfulness.">Romans 12:8</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift is a "goal setter" in the church. They often sense the direction in which God wants to move the body of Christ. They can then motivate people to move in that direction. Gifted leaders think about and communicate the potential they see in other people. This gift is needed in any effective ministry.
+							<br /><br />
+							<strong>Cautions:</strong> Realize that good relationships give leaders credibility. People need to have the sense that you have their best interest at heart, that you walk with God and that the vision you have is not of your own concoction. This gift will be proven over time; there needs to be proven faithfulness here. Leaders need the ability to keep moving in the face of put-downs and doubt. Because this is a very visible gift with lots of feedback being given, you'll have to be keenly aware of your motivations for service. You will be tested in this area through success as well as failure. God will want to help you become consistent and diligent in either situation, relying on Him. There may be a strong tendency to draw people to you rather than to God. Remember that all have a sphere of influence and you can take a leadership position without this gift.
+						</div>
+						<div class="tab-pane" id="mercy">
+							The spiritual capability to minister cheerfully and appropriately to people who are suffering. (<a href="#" class="popo" rel="popover" title="Romans 12:8" data-content="the one who exhorts, in his exhortation; the one who contributes, in generosity; the one who leads, with zeal; the one who does acts of mercy, with cheerfulness.">Romans 12:8</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift enjoys serving alongside hurting people. They have a strong desire to remove the pain or discomfort in the lives of others while at the same time remaining strong in their own faith. If this gift isn't exhibited in the body, we're missing a key part of the heart of God.
+							<br /><br />
+							This is different than compassion (a heart for hurting people). Mercy requires coming alongside people on a regular basis, feeling that pain and directing it toward godly action to alleviate that pain. They often work well alongside a prophet whom God has used to expose sin and pain in someone's life. The person with mercy comes next to that person, empathizing deeply with the pain, but offering God's solution for healing.
+							<br /><br />
+							<strong>Cautions:</strong> If you have this gift, you probably have a strong emotional component to your relational skills. Often though, when your emotional skills are strong, it is less natural to offer direction and truth based on God's word.
+							<br /><br />
+							You may fail to recognize the benefits that difficult times can bring to a person's life. For example, you may overlook how God is using a situation to bring about repentance or restitution. If you act too quickly you may short-circuit what God is trying to do.
+							<br /><br />
+							Be careful you don't become so overwhelmed with others' problems that you don't take care of your own personal obligations. 
+						</div>
+						<div class="tab-pane" id="prophecy">
+							The spiritual capability to proclaim God's truth with power and clarity in a timely and culturally sensitive fashion for correction, repentance, or edification. (<a href="#" class="popo" rel="popover" title="Romans 12:6" data-content="Having gifts that differ according to the grace given to us, let us use them: if prophecy, in proportion to our faith;">Romans 12:6</a>; <a href="#" class="popo" rel="popover" title="1 Corinthians 12:10, 28" data-content="<strong>10</strong> to another the working of miracles, to another prophecy, to another the ability to distinguish between spirits, to another various kinds of tongues, to another the interpretation of tongues.<br><br><strong>28</strong> And God has appointed in the church first apostles, second prophets, third teachers, then miracles, then gifts of healing, helping, administrating, and various kinds of tongues.">1 Corinthians 12:10, 28</a>; <a href="#" class="popo" rel="popover" title="Ephesians 4:11" data-content="And he gave the apostles, the prophets, the evangelists, the shepherds and teachers,">Ephesians 4:11</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift has an amazing ability to understand biblical truth, to apply it to the events and nuances of culture, and to expose the culture in its deception. They may seem like they aren't really compassionate - "they just say the truth and let the chips fall where they may." When they are effective, others often feel uncomfortable because God convicts them through the person with this gift. They are discerning, expressive, desire time alone (to get clarity), opinionated, and authoritative. They often see and articulate what many are oblivious to, or see only dimly. Those with the gift of prophecy express themselves in many ways: speaking publicly, sharing in Home Church, or communicating one-on-one.
+							<br /><br />
+							<strong>Cautions:</strong> Beware of lacking compassion. Your commitment to speak the truth may be so strong that you forget to say it with love (<a href="#" class="popo" rel="popover" title="Ephesians 4:15" data-content="Rather, speaking the truth in love, we are to grow up in every way into him who is the head, into Christ,">Ephesians 4:15</a>, <a href="http://www.biblegateway.com/passage/?search=1+Corinthians+13&version=ESV" rel="tooltip" class="tt" data-original-title="To BibleGateway.com">1 Corinthians 13</a>, <a href="#" class="popo" rel="popover" title="Romans 12:9ff" data-content="<strong>9</strong> Let love be genuine. Abhor what is evil; hold fast to what is good. <strong>10</strong>  Love one another with brotherly affection. Outdo one another in showing honor. <strong>11</strong> Do not be slothful in zeal, be fervent in spirit, serve the Lord. <strong>12</strong>  Rejoice in hope, be patient in tribulation, be constant in prayer. <strong>13</strong>  Contribute to the needs of the saints and seek to show hospitality.">Romans 12:9ff.</a>, <a href="#" class="popo" rel="popover" title="1 Peter 4:8" data-content="Above all, keep loving one another earnestly, since love covers a multitude of sins.">1 Peter 4:8</a>). You can discourage people if you're not careful. Nonetheless, remember that the purpose of your gift is to console, encourage, exhort (<a href="#" class="popo" rel="popover" title="1 Corinthians 14:3" data-content="On the other hand, the one who prophesies speaks to people for their upbuilding and encouragement and consolation.">1 Corinthians 14:3</a>), even if others may become uncomfortable. Also beware of pride and thinking you're the only one who sees things the way they really are.
+						</div>
+						<div class="tab-pane" id="shepherding">
+							The spiritual capability to guide, care for, and nurture individuals or groups in the body of Christ as they grow in faith. (<a href="#" class="popo" rel="popover" title="Ephesians 4:11" data-content="And he gave the apostles, the prophets, the evangelists, the shepherds and teachers,">Ephesians 4:11</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift provides oversight. They have a natural tendency to nurture people and give them direction. Shepherds are willing to provide the long-term care needed to help others work through issues in their lives. They like to spend time with people, feeding, protecting and disciplining in love. They gravitate towards building discipleship relationships. Gifted shepherds are a good balance for the gifted administrator or leader.
+							<br /><br />
+							<strong>Cautions:</strong> If you have this gift, don't use your oversight and concern to shield people from real-life experiences. Also, be careful to not view people as projects. Shepherds often have a clear vision for someone's growth. Don't impose your concerns and vision on someone else. Allow room for the Holy Spirit to convict and move them. The process remains between them and God. Remember that it is God that causes the growth; don't take responsibility for their problems. 
+						</div>
+						<div class="tab-pane" id="teaching">
+							The spiritual capability to understand, clearly explain, and apply the Word of God to the lives of listeners. (<a href="#" class="popo" rel="popover" title="Romans 12:7" data-content="if service, in our serving; the one who teaches, in his teaching;">Romans 12:7</a>; <a href="#" class="popo" rel="popover" title="1 Corinthians 12:28" data-content="And God has appointed in the church first apostles, second prophets, third teachers, then miracles, then gifts of healing, helping, administrating, and various kinds of tongues.">1 Corinthians 12:28</a>; <a href="#" class="popo" rel="popover" title="Ephesians 4:11" data-content="And he gave the apostles, the prophets, the evangelists, the shepherds and teachers,">Ephesians 4:11</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> Teachers have a real thirst for knowledge and have an insatiable desire to share that knowledge. A person with this gift can develop the ability to understand and fashion the message in a learner-oriented manner. They tend to be self-disciplined and prefer to teach groups rather than individuals.
+							<br /><br />
+							<strong>Cautions:</strong> Teachers often study and learn much more than can actually be conveyed in a single teaching. The teaching itself must convey the most important truths and be practical. You may tend to be too profound or detail-oriented. Make certain that you keep the teaching focused enough for the audience to hear it and digest its application. It is also common for a teacher to struggle with pride because she or he often has more knowledge than others do. Be careful not to become upset with people who are not as excited about a truth as you are. Most importantly, make certain that you are as interested in people as you are in facts.
+							<br /><br />
+							If you find out that this may be where you are gifted, realize that doesn't qualify you to present at Central Teaching or even Home Church tomorrow. A teaching gift takes time to develop. Choose a ministry that you are interested in, get involved, and pray for opportunities for your gifting to be used.
+							<br /><br />
+							Watch out for self-promotion. You may hear yourself think, "They ought to put me up to teach!" You may feel anger or resentment that you haven't been asked to teach yet or teach often enough.
+						</div>
+						<div class="tab-pane" id="wisdom">
+							The spiritual capability to apply spiritual knowledge effectively. (<a href="#" class="popo" rel="popover" title="1 Corinthians 12:8" data-content="For to one is given through the Spirit the utterance of wisdom, and to another the utterance of knowledge according to the same Spirit,">1 Corinthians 12:8</a>)
+							<br /><br />
+							<strong>Distinctives:</strong> A person with this gift enjoys skillfully applying biblical knowledge to a variety of life situations. They seem to have more common sense than the average person.
+							<br /><br />
+							<strong>Cautions:</strong> For God's knowledge to go out, it must first come in. Don't sit on your Bible knowledge as though you "have enough." This gift of wisdom has greater impact as your knowledge of God's Word grows and as you become more involved in other people's lives.
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span3 alert	alert-warning">
+					<strong>Last Updated:</strong> Sep 7, 2012
+				</div>
+				<div class="span3 alert alert-info">
+					<strong>Created By:</strong> <a href="http://www.vincemitchell.me">Vince Mitchell</a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-34483771-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+</html>
