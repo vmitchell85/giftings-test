@@ -1,8 +1,34 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import { useAssessment } from '../composables/useAssessment'
 import { GIFTS } from '../data/gifts'
+import { SHARE_GIFT_COUNT, joinGiftNames, sharePath } from '../data/share'
 
 const { scores, retakeTest } = useAssessment()
+
+const topGifts = computed(() => scores.value.slice(0, SHARE_GIFT_COUNT).map(s => s.giftIndex))
+const shareStatus = ref<'idle' | 'copied' | 'failed'>('idle')
+
+async function shareResults() {
+  const url = location.origin + sharePath(topGifts.value)
+  const text = `My top spiritual gifts: ${joinGiftNames(topGifts.value)}`
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: 'Spiritual Gifts Assessment', text, url })
+      return
+    } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') return
+      // Otherwise fall through to copying the link.
+    }
+  }
+  try {
+    await navigator.clipboard.writeText(url)
+    shareStatus.value = 'copied'
+  } catch {
+    shareStatus.value = 'failed'
+  }
+  setTimeout(() => { shareStatus.value = 'idle' }, 2500)
+}
 </script>
 
 <template>
@@ -30,7 +56,13 @@ const { scores, retakeTest } = useAssessment()
         <p v-if="GIFTS[item.giftIndex].scripture" class="text-xs text-zinc-400 dark:text-zinc-500">{{ GIFTS[item.giftIndex].scripture }}</p>
       </li>
     </ol>
-    <div class="pt-4 pb-4">
+    <div class="pt-4 pb-4 flex flex-col sm:flex-row gap-3 sm:items-center">
+      <button
+        v-if="topGifts.length === SHARE_GIFT_COUNT"
+        type="button"
+        @click="shareResults"
+        class="bg-sky-600 text-white px-6 py-3 rounded-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 hover:bg-sky-700"
+      >{{ shareStatus === 'copied' ? 'Link copied ✓' : shareStatus === 'failed' ? 'Couldn’t copy link' : 'Share My Results' }}</button>
       <button type="button" @click="retakeTest" class="px-6 py-3 rounded-lg font-semibold text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500">Retake Assessment</button>
     </div>
     <p class="text-xs text-zinc-400 dark:text-zinc-500 text-pretty pb-8">Taken from <em>Network Participant's Guide</em> by Don Cousins, Bill Hybels, and Bruce Bugbee. Copyright 1994 by Willow Creek Community Church. Used by permission of Zondervan. <a href="https://www.zondervan.com" class="underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-400">www.zondervan.com</a></p>

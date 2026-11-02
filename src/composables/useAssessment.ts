@@ -3,6 +3,10 @@ import { ref, computed } from 'vue'
 const STORAGE_KEY = 'spiritual-gifts-answers'
 const RESULTS_KEY = 'spiritual-gifts-results-v1'
 
+export const TOTAL_QUESTIONS = 133
+export const QUESTIONS_PER_PAGE = 5
+export const TOTAL_PAGES = Math.ceil(TOTAL_QUESTIONS / QUESTIONS_PER_PAGE)
+
 export const ANSWER_LABELS = ['Not at all', 'Seldom', 'Sometimes', 'Consistently']
 
 const screen = ref<'welcome' | 'test' | 'results'>('welcome')
@@ -25,28 +29,26 @@ const scores = ref<{ giftIndex: number; score: number; rank: number }[]>([])
   } catch { /* ignore */ }
 })()
 
-const hasStoredAnswers = computed(() => {
+// localStorage isn't reactive, so track whether stored answers exist in a ref
+// that is kept in sync whenever storage is written or cleared.
+const hasStoredAnswers = ref((() => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (!stored) return false
     const parsed = JSON.parse(stored)
     return Array.isArray(parsed) && parsed.some((v: unknown) => v !== null)
   } catch { return false }
-})
+})())
 
-const hasSavedResults = computed(() => {
-  try {
-    const s = localStorage.getItem(RESULTS_KEY)
-    return !!s && JSON.parse(s).length === 19
-  } catch { return false }
-})
+const hasSavedResults = computed(() => scores.value.length === 19)
 
 const answeredCount = computed(() => answers.value.filter(v => v !== null).length)
 const progressPercent = computed(() => Math.round((answeredCount.value / 133) * 100))
 
 const currentPageQuestions = computed(() => {
-  const start = page.value * 19
-  return Array.from({ length: 19 }, (_, i) => ({
+  const start = page.value * QUESTIONS_PER_PAGE
+  const end = Math.min(start + QUESTIONS_PER_PAGE, TOTAL_QUESTIONS)
+  return Array.from({ length: end - start }, (_, i) => ({
     globalIndex: start + i,
   }))
 })
@@ -57,6 +59,7 @@ const tierLatent = computed(() => scores.value.filter(s => s.score < 8))
 
 function saveToStorage() {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(answers.value)) } catch { /* ignore */ }
+  hasStoredAnswers.value = answers.value.some(v => v !== null)
 }
 
 function loadFromStorage(): boolean {
@@ -108,9 +111,10 @@ function prevPage() {
 }
 
 function nextPage() {
-  const start = page.value * 19
+  const start = page.value * QUESTIONS_PER_PAGE
+  const end = Math.min(start + QUESTIONS_PER_PAGE, TOTAL_QUESTIONS)
   const missing: number[] = []
-  for (let i = start; i < start + 19; i++) {
+  for (let i = start; i < end; i++) {
     if (answers.value[i] === null) missing.push(i)
   }
   if (missing.length > 0) {
@@ -122,7 +126,7 @@ function nextPage() {
   }
   showWarning.value = false
   unansweredOnPage.value = []
-  if (page.value < 6) {
+  if (page.value < TOTAL_PAGES - 1) {
     page.value++
     window.scrollTo({ top: 0, behavior: 'smooth' })
   } else {
@@ -155,6 +159,7 @@ function retakeTest() {
   answers.value = Array(133).fill(null)
   page.value = 0
   scores.value = []
+  hasStoredAnswers.value = false
   showWarning.value = false
   unansweredOnPage.value = []
   screen.value = 'welcome'
@@ -177,6 +182,7 @@ export function useAssessment() {
     tierGrowing,
     tierLatent,
     ANSWER_LABELS,
+    TOTAL_PAGES,
     beginAssessment,
     restoreAnswers,
     viewResults,

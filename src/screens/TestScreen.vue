@@ -11,6 +11,7 @@ const {
   progressPercent,
   currentPageQuestions,
   ANSWER_LABELS,
+  TOTAL_PAGES,
   setAnswer,
   prevPage,
   nextPage,
@@ -22,7 +23,7 @@ const {
     <!-- Progress header -->
     <div class="flex flex-col gap-3 pt-4">
       <div class="flex items-center justify-between text-sm text-zinc-500 dark:text-zinc-400">
-        <span>Page {{ page + 1 }} of 7</span>
+        <span>Page {{ page + 1 }} of {{ TOTAL_PAGES }}</span>
         <span class="tabular-nums">{{ answeredCount }}/133 answered</span>
       </div>
       <div class="h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden" role="progressbar" :aria-valuenow="progressPercent" aria-valuemin="0" aria-valuemax="100">
@@ -95,7 +96,7 @@ const {
         type="button"
         @click="nextPage"
         class="bg-sky-600 text-white px-6 py-2 rounded-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600 hover:bg-sky-700"
-      >{{ page === 6 ? 'Submit Assessment' : 'Next →' }}</button>
+      >{{ page === TOTAL_PAGES - 1 ? 'Submit Assessment' : 'Next →' }}</button>
     </div>
   </div>
 </template>
